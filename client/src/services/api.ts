@@ -1,6 +1,6 @@
 import { User, Habit, DashboardStats, CalendarData, ChartData, Achievement, StreakAttempt, NotificationItem } from '../types/index.js';
 
-const API_BASE = '/api';
+const API_BASE = (import.meta.env.VITE_API_URL as string) || '/api';
 
 function getAuthHeaders(): HeadersInit {
   const token = localStorage.getItem('dayzero_token');
