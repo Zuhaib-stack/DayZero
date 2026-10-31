@@ -1,0 +1,16 @@
+{
+  "name": "dayzero-habit-tracker",
+  "version": "1.0.0",
+  "description": "DayZero — Discipline Over Motivation Habit Tracker",
+  "scripts": {
+    "start": "cd server && npm start",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "test:server": "cd server && npx tsx src/test-flow.ts"
+  },
+  "keywords": ["habit-tracker", "discipline", "productivity", "gamification"],
+  "author": "DayZero Team",
+  "license": "MIT"
+}
+
