@@ -14,8 +14,25 @@ import { evaluateUserHabits } from './services/streakEngine.js';
 const app = express();
 
 // Middlewares
+const allowedOrigins = [
+  /\.vercel\.app$/,
+  /\.railway\.app$/,
+  /\.onrender\.com$/,
+  /^http:\/\/localhost(:\d+)?$/,
+  /^http:\/\/127\.0\.0\.1(:\d+)?$/,
+];
+
 app.use(cors({
-  origin: true,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    const allowed = allowedOrigins.some(pattern => pattern.test(origin));
+    if (allowed || process.env.ALLOWED_ORIGIN === origin) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS: origin ${origin} not allowed`));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
